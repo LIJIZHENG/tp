@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"D:\WWW\tp\public/../application/user/view/default/login\index.html";i:1526201049;}*/ ?>
 
 <!DOCTYPE html>
 <html lang="zh-CN">

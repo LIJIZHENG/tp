@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"D:\WWW\tp\public/../application/admin\view\default\public\success.html";i:1526200318;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:68:"D:\WWW\tp\public/../application/admin\view\default\public\error.html";i:1526200318;}*/ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,7 +6,7 @@
 <title>TwoThink跳转提示</title>
 <style type="text/css">
 *{ padding: 0; margin: 0; }
-body{ background: #30333F; font-family: '微软雅黑'; color: #fff; font-size: 16px; }
+body{ background: #290C0C; font-family: '微软雅黑'; color: #fff; font-size: 16px; }
 .system-message{ padding: 24px 48px; }
 .system-message h1{ font-size: 80px; font-weight: normal; line-height: 120px; margin-bottom: 12px }
 .system-message .jump{ padding-top: 10px;margin-bottom:20px}
@@ -25,7 +25,7 @@ body{ background: #30333F; font-family: '微软雅黑'; color: #fff; font-size: 
     vertical-align: middle;
     cursor: pointer;
     border: 0 none;
-    background-color: #308B04;
+    background-color: #8B0000;
     padding: 10px 20px;
     color: #fff;
     font-weight: bold;
@@ -34,14 +34,14 @@ body{ background: #30333F; font-family: '微软雅黑'; color: #fff; font-size: 
 }
 
 #btn-stop:hover,#href:hover{
-    background-color: #43BD08;
+    background-color: #ff0000;
 }
 </style>
 </head>
 <body>
 <div class="system-message">
-<h1>恭喜您!</h1>
-<p class="success"><?php echo(strip_tags($msg));?></p>
+<h1>抱歉,出错啦!</h1>
+<p class="error"><?php echo(strip_tags($msg));?></p>
 <p class="detail"></p>
 <p class="jump">
 <b id="wait"><?php echo($wait);?></b> 秒后页面将自动跳转
@@ -49,6 +49,7 @@ body{ background: #30333F; font-family: '微软雅黑'; color: #fff; font-size: 
 <div>
     <a id="href" id="btn-now" href="<?php if($url){echo $url;}else{echo 'javascript:history.back(-1);';}?>">立即跳转</a> 
     <button id="btn-stop" type="button" onclick="stop()">停止跳转</button> 
+    <a id="href" id="btn-now" href="<?php echo(url('Publics/logout')); ?>">重新登录</a> 
 </div>
 </div>
 <script type="text/javascript">
