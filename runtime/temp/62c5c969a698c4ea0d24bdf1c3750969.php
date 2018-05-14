@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:68:"D:\WWW\tp\public/../application/admin/view/default/repair\index.html";i:1526200318;s:67:"D:\WWW\tp\public/../application/admin/view/default/public\base.html";i:1526200318;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:68:"D:\WWW\tp\public/../application/admin/view/default/repair\index.html";i:1526262051;s:67:"D:\WWW\tp\public/../application/admin/view/default/public\base.html";i:1526200318;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -147,6 +147,7 @@
         <?php endif; ?>
         </tbody>
     </table>
+    <?php echo $list->render(); ?>
 </div>
 
         </div>

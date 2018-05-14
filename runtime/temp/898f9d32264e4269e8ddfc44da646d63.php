@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:69:"D:\WWW\tp\public/../application/admin/view/default/channel\index.html";i:1526200318;s:67:"D:\WWW\tp\public/../application/admin/view/default/public\base.html";i:1526200318;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:71:"D:\WWW\tp\public/../application/admin/view/default/database\import.html";i:1526200318;s:67:"D:\WWW\tp\public/../application/admin/view/default/public\base.html";i:1526200318;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -100,50 +100,45 @@
             
 
             
-	<div class="main-title">
-		<h2>导航管理</h2>
-	</div>
+    <!-- 标题栏 -->
+    <div class="main-title">
+        <h2>数据备份</h2>
+    </div>
+    <!-- /标题栏 -->
 
-	<div class="cf">
-		<a class="btn" href="<?php echo url('add','pid='.$pid); ?>">新 增</a>
-		<a class="btn" href="javascript:;">删 除</a>
-		<button class="btn list_sort" url="<?php echo url('sort',array('pid'=>input('get.pid',0)),''); ?>">排序</button>
-	</div>
-
-	<div class="data-table table-striped">
-		<table>
-			<thead>
-				<tr>
-					<th class="row-selected">
-						<input class="checkbox check-all" type="checkbox">
-					</th>
-					<th>ID</th>
-					<th>导航名称</th>
-					<th>导航地址</th>
-                    <th>排序</th>
-					<th>操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php if(!(empty($list) || (($list instanceof \think\Collection || $list instanceof \think\Paginator ) && $list->isEmpty()))): if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$channel): $mod = ($i % 2 );++$i;?>
-					<tr>
-						<td><input class="ids row-selected" type="checkbox" name="" id="" value="<?php echo $channel['id']; ?>"> </td>
-						<td><?php echo $channel['id']; ?></td>
-						<td><a href="<?php echo url('index?pid='.$channel['id']); ?>"><?php echo $channel['title']; ?></a></td>
-						<td><?php echo $channel['url']; ?></td>
-                        <td><?php echo $channel['sort']; ?></td>
-						<td>
-							<a title="编辑" href="<?php echo url('edit?id='.$channel['id'].'&pid='.$pid); ?>">编辑</a>
-							<a href="<?php echo url('setStatus?ids='.$channel['id'].'&status='.abs(1-$channel['status'])); ?>" class="ajax-get"><?php echo show_status_op($channel['status']); ?></a>
-							<a class="confirm ajax-get" title="删除" href="<?php echo url('del?id='.$channel['id']); ?>">删除</a>
-						</td>
-					</tr>
-				<?php endforeach; endif; else: echo "" ;endif; else: ?>
-				<td colspan="6" class="text-center"> aOh! 暂时还没有内容! </td>
-				<?php endif; ?>
-			</tbody>
-		</table>
-	</div>
+    <!-- 应用列表 -->
+    <div class="data-table table-striped">
+        <table>
+            <thead>
+                <tr>
+                    <th width="200">备份名称</th>
+                    <th width="80">卷数</th>
+                    <th width="80">压缩</th>
+                    <th width="80">数据大小</th>
+                    <th width="200">备份时间</th>
+                    <th>状态</th>
+                    <th width="120">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$data): $mod = ($i % 2 );++$i;?>
+                    <tr>
+                        <td><?php echo date('Ymd-His',$data['time']); ?></td>
+                        <td><?php echo $data['part']; ?></td>
+                        <td><?php echo $data['compress']; ?></td>
+                        <td><?php echo format_bytes($data['size']); ?></td>
+                        <td><?php echo $key; ?></td>
+                        <td>-</td>
+                        <td class="action">
+                            <a class="db-import" href="<?php echo url('import?time='.$data['time']); ?>">还原</a>&nbsp;
+                            <a class="ajax-get confirm" href="<?php echo url('del?time='.$data['time']); ?>">删除</a>
+                        </td>
+                    </tr>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+            </tbody>
+        </table>
+    </div>
+    <!-- /应用列表 -->
 
         </div>
         <div class="cont-ft">
@@ -241,27 +236,39 @@
         }
     </script>
     
-<script type="text/javascript">
-    $(function() {
-    	//点击排序
-    	$('.list_sort').click(function(){
-    		var url = $(this).attr('url');
-    		var ids = $('.ids:checked');
-    		var param = '';
-    		if(ids.length > 0){
-    			var str = new Array();
-    			ids.each(function(){
-    				str.push($(this).val());
-    			});
-    			param = str.join(',');
-    		}
-
-    		if(url != undefined && url != ''){
-    			window.location.href = url + '/ids/' + param;
-    		}
-    	});
-    });
-</script>
+    <script type="text/javascript">
+        $(".db-import").click(function(){
+            var self = this, code = ".";
+            $.get(self.href, success, "json");
+            window.onbeforeunload = function(){ return "正在还原数据库，请不要关闭！" }
+            return false;
+        
+            function success(data){
+                if(data.code){
+                    if(data.data.gz){
+                        data.msg += code;
+                        if(code.length === 5){
+                            code = ".";
+                        } else {
+                            code += ".";
+                        }
+                    }
+                    $(self).parent().prev().text(data.msg);
+                    if(data.data.part){
+                        $.get(self.href, 
+                            {"part" : data.data.part, "start" : data.data.start}, 
+                            success, 
+                            "json"
+                        );
+                    }  else {
+                        window.onbeforeunload = function(){ return null; }
+                    }
+                } else {
+                    updateAlert(data.msg,'alert-error');
+                }
+            }
+        });
+    </script>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:36:"D:\WWW\tp\addons/devteam\widget.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:36:"D:\WWW\tp\addons/devteam\widget.html";i:1526200318;}*/ ?>
 <div class="span<?php echo $addons_config['width']; ?>">
 	<div class="columns-mod">
 		<div class="hd cf">
