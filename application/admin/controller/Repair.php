@@ -8,7 +8,7 @@ class Repair extends Admin{
      * 报修管理列表
      */
     public function index(){
-        $list = \think\Db::name('Repair')->paginate(1);
+        $list = \think\Db::name('Repair')->paginate(3);
         $this->assign('list', $list);
         $this->assign('meta_title' , '保修管理');
 //        var_dump($list);die;

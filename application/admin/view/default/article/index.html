@@ -68,8 +68,8 @@
 			<button class="btn ajax-post confirm" target-form="ids" url="{:url("Article/setStatus",array("status"=>-1,'cate_id'=>input('cate_id')))}">删 除</button>
 			<!-- <button class="btn document_add" url="{:url('article/batchOperate',array('cate_id'=>$cate_id,'pid'=>input('pid',0)))}">导入</button> -->
 			<button class="btn list_sort" url="{:url('sort',array('cate_id'=>$cate_id,'pid'=>input('pid',0)),'')}">排序</button>
-			<div class="btn-group"> 
-			    <a class="btn" href="{:url('recycle',['model_id'=>$model_id])}">回收站</a> 
+			<div class="btn-group">
+			    <a class="btn" href="{:url('recycle',['model_id'=>$model_id])}">回收站</a>
 			</div>
 		</div>
 

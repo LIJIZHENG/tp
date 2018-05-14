@@ -1,4 +1,4 @@
-
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"D:\WWW\tp\public/../application/home/view/default/index\fen.html";i:1526268968;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -15,8 +15,8 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
         .main{margin-bottom: 60px;}
@@ -43,14 +43,21 @@
         </div>
     </nav>
     <!--导航结束-->
+
     <div class="container-fluid">
-        <div class="blank"></div>
-        <h3 class="noticeDetailTitle"><strong>{$info.title}</strong></h3>
-        <div class="noticeDetailInfo">发布者:{$info.uid|get_username}</div>
-        <div class="noticeDetailInfo">发布时间：{$info.create_time|date='Y-m-d H:i',###}</div>
-        <div class="noticeDetailContent">
-            <div style="width: 100px;height: 20px">{$info.content}</div>
-        </div>
+
+        <!--<div class="row noticeList">-->
+            <!--<a href="notice-detail.html">-->
+                <!--<div class="col-xs-2">-->
+                    <!--<img class="noticeImg" src="../image/1.png" />-->
+                <!--</div>-->
+                <!--<div class="col-xs-10">-->
+                    <!--<p class="title">关于购房落户的政策解读</p>-->
+                    <!--<p class="intro">经过几年的摸索,XXX小区的业主委会员已经</p>-->
+                    <!--<p class="info">浏览: 199 <span class="pull-right">2016-05-11</span> </p>-->
+                <!--</div>-->
+            <!--</a>-->
+        <!--</div>-->
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

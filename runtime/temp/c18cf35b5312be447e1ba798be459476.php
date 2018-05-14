@@ -1,4 +1,4 @@
-
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\WWW\tp\public/../application/home/view/default/category\fen.html";i:1526278187;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -15,8 +15,8 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
         .main{margin-bottom: 60px;}
@@ -43,14 +43,22 @@
         </div>
     </nav>
     <!--导航结束-->
+
     <div class="container-fluid">
-        <div class="blank"></div>
-        <h3 class="noticeDetailTitle"><strong>{$info.title}</strong></h3>
-        <div class="noticeDetailInfo">发布者:{$info.uid|get_username}</div>
-        <div class="noticeDetailInfo">发布时间：{$info.create_time|date='Y-m-d H:i',###}</div>
-        <div class="noticeDetailContent">
-            <div style="width: 100px;height: 20px">{$info.content}</div>
+        <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$value): $mod = ($i % 2 );++$i;?>
+        <div class="row noticeList">
+            <a href="notice-detail.html">
+                <div class="col-xs-10">
+                    <div class="span2">
+                        <a href="/home/article/detail/id/<?php echo $value['id']; ?>.html"><img class="img-thumbnail" src="/static/static/nopic.jpg"></a>
+                    </div>
+                    <p class="title"><?php echo $value['title']; ?></p>
+                    <p class="intro"></p>
+                    <p class="info">浏览: <?php echo $value['view']; ?><span class="pull-right"><?php echo $value['create_time']; ?></span> </p>
+                </div>
+            </a>
         </div>
+        <?php endforeach; endif; else: echo "" ;endif; ?>
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

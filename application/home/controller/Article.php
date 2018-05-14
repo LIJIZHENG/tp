@@ -1,5 +1,6 @@
 <?php
 namespace app\home\controller;
+use app\admin\model\AuthGroup;
 use think\Request;
 use app\home\model\Document;
 /**
@@ -12,7 +13,6 @@ class Article extends Home {
 	public function index(){
 		/* 分类信息 */
 		$category = $this->category();
-
 		//频道页只显示模板，默认不读取任何内容
 		//内容可以通过模板标签自行定制
 
@@ -23,22 +23,66 @@ class Article extends Home {
 
 	/* 文档模型列表页 */
 	public function lists($p = 1){
+	    @session_start();
+        $uid = session('uid');
+	    if($uid !=null){
+            /* 分类信息 */
+            $category = $this->category();
+//		var_dump($category);die;
+            /* 获取当前分类列表 */
+            $Document = new Document();
+            $list = $Document->lists($category['id']);
+            if(false === $list){
+                $this->error('获取列表数据失败！');
+            }
 
-		/* 分类信息 */
-		$category = $this->category();
-		/* 获取当前分类列表 */
-		$Document = new Document();
-		$list = $Document->lists($category['id']);
-		if(false === $list){
-			$this->error('获取列表数据失败！');
-		}
+            /* 模板赋值并渲染模板 */
+            $this->assign('category', $category);
+            $this->assign('list', $list);
+//		 var_dump($category);
+//		 var_dump($list);
+//		 foreach ($list as $value){
+//		     var_dump($value);
+//         }
+//		 die;
+//		return $this->fetch($category['template_lists']);
 
-		/* 模板赋值并渲染模板 */
-		$this->assign('category', $category);
-		$this->assign('list', $list);
-		// echo $category['template_lists'];
-		return $this->fetch($category['template_lists']);
+            return view('category/fen',['category'=>$category,'list'=>$list]);
+        }else{
+	        $this->error('请登录!','http://www.tp.cc/user/login/index.html');
+        }
 	}
+    /* 文档模型列表页 */
+    public function bian($p = 1){
+        @session_start();
+        $uid = session('uid');
+        if($uid !=null){
+        /* 分类信息 */
+        $category = $this->category();
+//		var_dump($category);die;
+        /* 获取当前分类列表 */
+        $Document = new Document();
+        $list = $Document->lists($category['id']);
+        if(false === $list){
+            $this->error('获取列表数据失败！');
+        }
+
+        /* 模板赋值并渲染模板 */
+        $this->assign('category', $category);
+        $this->assign('list', $list);
+//		 var_dump($category);
+//		 var_dump($list);
+//		 foreach ($list as $value){
+//		     var_dump($value);
+//         }
+//		 die;
+//		return $this->fetch($category['template_lists']);
+
+        return view('category/fen',['category'=>$category,'list'=>$list]);
+        }else{
+            $this->error('请登录!','http://www.tp.cc/user/login/index.html');
+        }
+    }
 
 	/* 文档模型详情页 */
 	public function detail($id = 0, $p = 1){
@@ -100,5 +144,37 @@ class Article extends Home {
 			$this->error('分类不存在或被禁用！');
 		}
 	}
+    /**
+     * 在线报修
+     */
+    public function add(){
+        @session_start();
+        $uid = session('uid');
+        if($uid !=null){
+      if(request()->isPost()) {
+          $Repair = model('repair');
+          $post_data = \think\Request::instance()->post();
+//          var_dump($post_data);die;
+          $post_data['odd_number'] = uniqid();
+          //自动验证
+          $validate = validate('Article');
+          if (!$validate->check($post_data)) {
+              return $this->error($validate->getError());
+          }
+          $data = $Repair->create($post_data);
+          if ($data) {
+              $this->success('新增成功', url('/home/index'));
+              //记录行为
+              action_log('update_article', 'repair', $data->id, UID);
+          } else {
+              $this->error($Repair->getError());
+          }
 
+      }else{
+         return view('article/add');
+      }
+        }else{
+            $this->error('请登录!','http://www.tp.cc/user/login/index.html');
+        }
+    }
 }

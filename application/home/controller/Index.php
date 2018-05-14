@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 
 namespace app\home\controller;
+use app\home\model\Category;
 use app\home\model\Document;
 use OT\DataDictionary;
 use think\Config;
@@ -19,14 +20,15 @@ class Index extends Home{
 
 	//系统首页
     public function index(){
-        $category = model('Category')->getTree();
+        @session_start();
+        $uid = session('uid');
+        $category = model('Category')->where('pid',42)->select();
         $document = new Document();
-        $lists    = $document->lists(null);
+        $lists= $document->lists(null);
         $this->assign('category',$category);//栏目
         $this->assign('lists',$lists);//列表
+        $this->assign('uid',$uid);//列表
         $this->assign('page',model('Document')->page);//分页
-
         return $this->fetch();
     }
-
 }

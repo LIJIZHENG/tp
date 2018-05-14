@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:44:"D:\WWW\tp\addons/editorforadmin\content.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:44:"D:\WWW\tp\addons/editorforadmin\content.html";i:1526200318;}*/ ?>
 <?php switch($addons_config['editor_type']): case "1": ?>
 		
 		<input type="hidden" name="parse" value="0">

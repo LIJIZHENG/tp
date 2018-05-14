@@ -34,7 +34,8 @@ class Login extends Controller {
             /* 调用UC登录接口登录 */
             $user = new UcApi;
             $uid = $user->login($username, $password, $type);
-
+            @session_start();
+            session('uid',$uid);
             if(0 < $uid){ //UC登录成功
                 /* 登录用户 */
                 $Member = model('Member');

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:68:"D:\WWW\tp\public/../application/admin/view/default/repair\index.html";i:1526262051;s:67:"D:\WWW\tp\public/../application/admin/view/default/public\base.html";i:1526200318;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:68:"D:\WWW\tp\public/../application/admin/view/default/repair\index.html";i:1526282623;s:67:"D:\WWW\tp\public/../application/admin/view/default/public\base.html";i:1526200318;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -107,7 +107,7 @@
 <div class="cf">
     <a class="btn" href="<?php echo url('add','id='.$pid); ?>">新 增</a>
     <a class="btn" href="javascript:;">删 除</a>
-    <button class="btn list_sort" url="<?php echo url('sort',array('pid'=>input('get.pid',0)),''); ?>">排序</button>
+    <!--<button class="btn list_sort" url="<?php echo url('sort',array('pid'=>input('get.pid',0)),''); ?>">排序</button>-->
 </div>
 
 <div class="data-table table-striped">
@@ -140,6 +140,7 @@
                 <a title="编辑" href="<?php echo url('edit?id='.$repair['id'].'&pid='.$pid); ?>">编辑</a>
                 <!--<a href="<?php echo url('setStatus?ids='.$channel['id'].'&status='.abs(1-$channel['status'])); ?>" class="ajax-get"><?php echo show_status_op($channel['status']); ?></a>-->
                 <a class="confirm ajax-get" title="删除" href="<?php echo url('del?id='.$repair['id']); ?>">删除</a>
+                <a class="confirm ajax-get" title="删除" href="<?php echo url('del?id='.$repair['id']); ?>">处理报修</a>
             </td>
         </tr>
         <?php endforeach; endif; else: echo "" ;endif; else: ?>
@@ -147,7 +148,8 @@
         <?php endif; ?>
         </tbody>
     </table>
-    <?php echo $list->render(); ?>
+
+   <div class="page"><?php echo $list->render(); ?></div>
 </div>
 
         </div>

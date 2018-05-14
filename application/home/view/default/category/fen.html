@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -15,8 +14,8 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
         .main{margin-bottom: 60px;}
@@ -43,14 +42,22 @@
         </div>
     </nav>
     <!--导航结束-->
+
     <div class="container-fluid">
-        <div class="blank"></div>
-        <h3 class="noticeDetailTitle"><strong>{$info.title}</strong></h3>
-        <div class="noticeDetailInfo">发布者:{$info.uid|get_username}</div>
-        <div class="noticeDetailInfo">发布时间：{$info.create_time|date='Y-m-d H:i',###}</div>
-        <div class="noticeDetailContent">
-            <div style="width: 100px;height: 20px">{$info.content}</div>
+        {volist name="list" id="value"}
+        <div class="row noticeList">
+            <a href="notice-detail.html">
+                <div class="col-xs-10">
+                    <div class="span2">
+                        <a href="/home/article/detail/id/{$value.id}.html"><img class="img-thumbnail" src="/static/static/nopic.jpg"></a>
+                    </div>
+                    <p class="title">{$value['title']}</p>
+                    <p class="intro"></p>
+                    <p class="info">浏览: {$value.view}<span class="pull-right">{$value.create_time}</span> </p>
+                </div>
+            </a>
         </div>
+        {/volist}
     </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

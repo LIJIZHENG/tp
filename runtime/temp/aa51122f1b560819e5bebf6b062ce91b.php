@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"D:\WWW\tp\public/../application/home/view/default/article\article\detail.html";i:1526279785;}*/ ?>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -45,11 +46,11 @@
     <!--导航结束-->
     <div class="container-fluid">
         <div class="blank"></div>
-        <h3 class="noticeDetailTitle"><strong>{$info.title}</strong></h3>
-        <div class="noticeDetailInfo">发布者:{$info.uid|get_username}</div>
-        <div class="noticeDetailInfo">发布时间：{$info.create_time|date='Y-m-d H:i',###}</div>
+        <h3 class="noticeDetailTitle"><strong><?php echo $info['title']; ?></strong></h3>
+        <div class="noticeDetailInfo">发布者:<?php echo get_username($info['uid']); ?></div>
+        <div class="noticeDetailInfo">发布时间：<?php echo date('Y-m-d H:i',$info['create_time']); ?></div>
         <div class="noticeDetailContent">
-            <div style="width: 100px;height: 20px">{$info.content}</div>
+            <div style="width: 100px;height: 20px"><?php echo $info['content']; ?></div>
         </div>
     </div>
 </div>

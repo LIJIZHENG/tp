@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\tp\public/../application/admin/view/default/article\index.html";i:1526200318;s:67:"D:\WWW\tp\public/../application/admin/view/default/public\base.html";i:1526200318;s:72:"D:\WWW\tp\public/../application/admin/view/default/article\sidemenu.html";i:1526200318;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\tp\public/../application/admin/view/default/article\index.html";i:1526283446;s:67:"D:\WWW\tp\public/../application/admin/view/default/public\base.html";i:1526200318;s:72:"D:\WWW\tp\public/../application/admin/view/default/article\sidemenu.html";i:1526200318;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -227,8 +227,8 @@
 			<button class="btn ajax-post confirm" target-form="ids" url="<?php echo url("Article/setStatus",array("status"=>-1,'cate_id'=>input('cate_id'))); ?>">删 除</button>
 			<!-- <button class="btn document_add" url="<?php echo url('article/batchOperate',array('cate_id'=>$cate_id,'pid'=>input('pid',0))); ?>">导入</button> -->
 			<button class="btn list_sort" url="<?php echo url('sort',array('cate_id'=>$cate_id,'pid'=>input('pid',0)),''); ?>">排序</button>
-			<div class="btn-group"> 
-			    <a class="btn" href="<?php echo url('recycle',['model_id'=>$model_id]); ?>">回收站</a> 
+			<div class="btn-group">
+			    <a class="btn" href="<?php echo url('recycle',['model_id'=>$model_id]); ?>">回收站</a>
 			</div>
 		</div>
 
