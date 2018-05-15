@@ -43,26 +43,58 @@
     </nav>
     <!--导航结束-->
 
-    <div class="container-fluid">
-        {volist name="list" id="value"}
-        <div class="row noticeList">
-            <a href="notice-detail.html">
-                <div class="col-xs-10">
-                    <div class="span2">
-                        <a href="/home/article/detail/id/{$value.id}.html"><img class="img-thumbnail" src="/static/static/nopic.jpg"></a>
-                    </div>
-                    <p class="title">{$value['title']}</p>
-                    <p class="intro"></p>
-                    <p class="info">浏览: {$value.view}<span class="pull-right">{$value.create_time}</span> </p>
-                </div>
-            </a>
-        </div>
-        {/volist}
+    <div id="div" class="container-fluid">
+        <!--{volist name="list" id="value"}-->
+        <!--<div id="aa" class="row noticeList">-->
+            <!--<a href="notice-detail.html">-->
+                <!--<div class="col-xs-10">-->
+                    <!--<div class="span2">-->
+                        <!--<a href="/home/article/detail/id/{$value.id}.html"><img class="img-thumbnail" src="/static/static/nopic.jpg"></a>-->
+                    <!--</div>-->
+                    <!--<p class="title">{$value['title']}</p>-->
+                    <!--<p class="intro"></p>-->
+                    <!--<p class="info">浏览: {$value.view}<span class="pull-right">{$value.create_time}</span> </p>-->
+                <!--</div>-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--{/volist}-->
     </div>
+    <div id="dd"><a href="#">获取更多</a></div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/static/login/jquery-1.11.2.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/static/login/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        var b=1;
+         $("#dd").click(function () {
+            b++;
+             $.get("/home/article/lists/category/xiaoqu.html",{per_page:b}, function (data) {
+         var html='';
+         var n=0;
+                 for(var i in data){
+                     n++;
+               html +="<div class='row noticeList'><a href='notice-detail.html'><div class='col-xs-10'><div class='span2'><a href='/home/article/detail/id/"+data[i].id+".html'><img class='img-thumbnail' src='/static/static/nopic.jpg'></a></div>";
+                     html+="<p class='title'>"+data[i].title+"</p><p class='intro'></p><p class='info'>浏览: "+data[i].view+"<span class='pull-right'>"+data[i].create_time+"</span> </p></div></a>";
+                        }
+               $("#div").html(html);
+                 if(n==1){
+                     alert('没有数据了,请不要骚操作!');
+                 }
+             });
+         });
+             $.get("/home/article/lists/category/xiaoqu.html",{per_page:b}, function (data) {
+                 var html='';
+                 for(var i in data){
+//                     console.log(data[i].title)
+                     html +="<div class='row noticeList'><a href='notice-detail.html'><div class='col-xs-10'><div class='span2'><a href='/home/article/detail/id/"+data[i].id+".html'><img class='img-thumbnail' src='/static/static/nopic.jpg'></a></div>";
+                     html+="<p class='title'>"+data[i].title+"</p><p class='intro'></p><p class='info'>浏览: "+data[i].view+"<span class='pull-right'>"+'时间:'+data[i].create_time+"</span> </p></div></a>";
+                 }
+                 $("#div").html(html);
+
+             });
+    });
+</script>
 </body>
 </html>

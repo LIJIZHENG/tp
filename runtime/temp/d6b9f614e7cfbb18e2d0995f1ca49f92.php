@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"D:\WWW\tp\public/../application/home/view/default/index\index.html";i:1526288546;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"D:\WWW\tp\public/../application/home/view/default/index\index.html";i:1526389311;}*/ ?>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -61,7 +61,7 @@
 
 
                     <div class="col-xs-4">
-                        <a href="/home/article/lists/category/xiaoqu.html">
+                        <a href="/home/article/tong">
                             <div class="indexLabel label-danger">
                                 <span class="glyphicon glyphicon-bullhorn"></span><br/>
                                 小区通知
@@ -69,7 +69,7 @@
                         </a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="/home/article/bian/category/BIANMING.html">
+                        <a href="/home/article/bian">
                             <div class="indexLabel label-warning">
                                 <span class="glyphicon glyphicon-ok-circle"></span><br/>
                                 便民服务
@@ -84,14 +84,14 @@
                             </div>
                         </a>
                     </div>
-                    <!--<div class="col-xs-4">-->
-                        <!--<a href="/home/article/lists/category/45.html">-->
-                            <!--<div class="indexLabel label-success">-->
-                                <!--<span class="glyphicon glyphicon-briefcase"></span><br/>-->
-                                <!--商家活动-->
-                            <!--</div>-->
-                        <!--</a>-->
-                    <!--</div>-->
+                    <div class="col-xs-4">
+                        <a href="/home/article/shop">
+                            <div class="indexLabel label-success">
+                                <span class="glyphicon glyphicon-briefcase"></span><br/>
+                                商家活动
+                            </div>
+                        </a>
+                    </div>
                     <!--<div class="col-xs-4">-->
                         <!--<a href="/home/index/house.html">-->
                             <!--<div class="indexLabel label-primary">-->

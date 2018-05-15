@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\WWW\tp\public/../application/home/view/default/category\fen.html";i:1526390382;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"D:\WWW\tp\public/../application/home/view/default/category\huo.html";i:1526390319;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -60,7 +60,7 @@
         <!--</div>-->
         <!--<?php endforeach; endif; else: echo "" ;endif; ?>-->
     </div>
-    <div id="dd"><a href="#">获取更多</a></div>
+    <div id="dd">获取更多</div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/static/login/jquery-1.11.2.min.js"></script>
@@ -71,11 +71,13 @@
         var b=1;
          $("#dd").click(function () {
             b++;
-             $.get("/home/article/lists/category/xiaoqu.html",{per_page:b}, function (data) {
+             $.get("/home/article/lists/category/BIANMING.html",{per_page:b}, function (data) {
+                 console.log(b);
          var html='';
          var n=0;
                  for(var i in data){
                      n++;
+//                     console.log(data[i].title)
                html +="<div class='row noticeList'><a href='notice-detail.html'><div class='col-xs-10'><div class='span2'><a href='/home/article/detail/id/"+data[i].id+".html'><img class='img-thumbnail' src='/static/static/nopic.jpg'></a></div>";
                      html+="<p class='title'>"+data[i].title+"</p><p class='intro'></p><p class='info'>浏览: "+data[i].view+"<span class='pull-right'>"+data[i].create_time+"</span> </p></div></a>";
                         }
@@ -85,7 +87,7 @@
                  }
              });
          });
-             $.get("/home/article/lists/category/xiaoqu.html",{per_page:b}, function (data) {
+             $.get("/home/article/lists/category/BIANMING.html",{per_page:b}, function (data) {
                  var html='';
                  for(var i in data){
 //                     console.log(data[i].title)

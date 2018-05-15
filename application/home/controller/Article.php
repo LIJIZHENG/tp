@@ -1,6 +1,7 @@
 <?php
 namespace app\home\controller;
 use app\admin\model\AuthGroup;
+use think\Db;
 use think\Request;
 use app\home\model\Document;
 /**
@@ -21,17 +22,30 @@ class Article extends Home {
 		return $this->fetch($category['template_index']);
 	}
 
-	/* 文档模型列表页 */
+    public function tong(){
+	    return view('category/fen');
+    }
+
+    public function shop(){
+        return view('category/shop');
+    }
+
+    public function bian(){
+        return view('category/huo');
+    }
+        /* 文档模型列表页 */
 	public function lists($p = 1){
 	    @session_start();
         $uid = session('uid');
 	    if($uid !=null){
+	        $per_page=$_GET['per_page']??1;
             /* 分类信息 */
             $category = $this->category();
 //		var_dump($category);die;
             /* 获取当前分类列表 */
-            $Document = new Document();
-            $list = $Document->lists($category['id']);
+//            $Document = new Document();
+//            $list = $Document->lists($category['id']);
+            $list=Db::name("document")->where("category_id",'=',$category['id'])->where("status",'=',1)->paginate($per_page);
             if(false === $list){
                 $this->error('获取列表数据失败！');
             }
@@ -47,42 +61,17 @@ class Article extends Home {
 //		 die;
 //		return $this->fetch($category['template_lists']);
 
-            return view('category/fen',['category'=>$category,'list'=>$list]);
+//            var_dump($list);
+            $v=[];
+            foreach ($list as $value){
+                $v[]=$value;
+            }
+             return $v;
+//            return view('category/fen',['category'=>$category,'list'=>$list]);
         }else{
 	        $this->error('请登录!','http://www.tp.cc/user/login/index.html');
         }
 	}
-    /* 文档模型列表页 */
-    public function bian($p = 1){
-        @session_start();
-        $uid = session('uid');
-        if($uid !=null){
-        /* 分类信息 */
-        $category = $this->category();
-//		var_dump($category);die;
-        /* 获取当前分类列表 */
-        $Document = new Document();
-        $list = $Document->lists($category['id']);
-        if(false === $list){
-            $this->error('获取列表数据失败！');
-        }
-
-        /* 模板赋值并渲染模板 */
-        $this->assign('category', $category);
-        $this->assign('list', $list);
-//		 var_dump($category);
-//		 var_dump($list);
-//		 foreach ($list as $value){
-//		     var_dump($value);
-//         }
-//		 die;
-//		return $this->fetch($category['template_lists']);
-
-        return view('category/fen',['category'=>$category,'list'=>$list]);
-        }else{
-            $this->error('请登录!','http://www.tp.cc/user/login/index.html');
-        }
-    }
 
 	/* 文档模型详情页 */
 	public function detail($id = 0, $p = 1){
